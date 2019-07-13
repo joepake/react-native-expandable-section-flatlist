@@ -87,10 +87,10 @@ class ExpandableList extends Component {
     LayoutAnimation.easeInEaseOut();
   };
 
-  resetSectionState = (index, state) => {
-    this.setState((s) => {
+  resetSectionState = (index) => {
+    this.setState((state) => {
       const memberOpened = new Map();
-      memberOpened.set(index, state); // toggle
+      memberOpened.set(index, !state.memberOpened.get(index)); // toggle
       return {memberOpened};
     });
     LayoutAnimation.easeInEaseOut();
