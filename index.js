@@ -87,6 +87,15 @@ class ExpandableList extends Component {
     LayoutAnimation.easeInEaseOut();
   };
 
+  resetSectionState = (index, state) => {
+    this.setState((s) => {
+      const memberOpened = new Map();
+      memberOpened.set(index, state); // toggle
+      return {memberOpened};
+    });
+    LayoutAnimation.easeInEaseOut();
+  };
+
   _onPress = (i) => {
     this.setState((state) => {
       const memberOpened = new Map(state.memberOpened);
@@ -124,7 +133,7 @@ class ExpandableList extends Component {
 
     return (
       <View onLayout={this._itemLayout}>
-        <TouchableOpacity onPress={() => this._onPress(sectionId)}>
+        <TouchableOpacity onPress={() => this.props.onHeaderPress(sectionId)}>
           { renderSectionHeaderX ? renderSectionHeaderX(item[headerKey], sectionId,
               !!this.state.memberOpened.get(sectionId)) : null}
         </TouchableOpacity>
